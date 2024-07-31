@@ -1,0 +1,53 @@
+<div class="py-5 bg-light">
+  <div class="container py-5 bg-dark" style="border-radius:8px">
+    <div class="row border border-light">
+      <div class="col-md-5 text-white">
+        <img class="img-fluid d-block mb-5 rounded w-75 mx-auto py-3" [src]="currentMovie.posterLink"> </div>
+      <div class="col-md-7 text-white align-self-center">
+        <h1 class="display-4 mb-4">{{currentMovie.name}}</h1>
+        <div class="row">
+          <div class="col-md-12 p-2">
+            <ul class="list-group text-dark">
+              <li class="list-group-item"> </li>
+              <li class="list-group-item">CATEGORY: {{currentMovie.category}}</li>
+              <li class="list-group-item">ACTORS: {{currentMovie.actors}}</li>
+              <li class="list-group-item">DIRECTORS: {{currentMovie.directors}}</li>
+              <li class="list-group-item">DURATION: {{currentMovie.duration}}</li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <a target="_blank" [href]="currentMovie.youtubeLink" class="btn btn-lg text-white" style="background-color:#FF0004">
+              <i class="fa fa-play"></i> Trailer</a>
+            <a class="btn btn-lg mx-1 btn-secondary" (click)="goTicket()">GET TICKETS</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="container text-center mt-5">
+        <img class="img-thumbnail" style="width:800px; height:450px" [src]="currentMovie.imageLink1">
+      </div>
+    </div>
+
+
+    <div class="row mt-2">  
+      <h3 class=" text-light">MAIN STORY</h3>
+      
+    </div>
+    <p class="h-75 text-light">{{currentMovie.mainStory}}</p>
+    
+
+
+
+
+  </div>
+</div>
+<div class="py-5">
+  <div class="container bg-dark">
+    <div class="row">
+      <div class="col-md-12"> </div>
+    </div>
+  </div>
+</div>

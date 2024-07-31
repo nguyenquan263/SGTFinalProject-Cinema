@@ -1,0 +1,9 @@
+
+.active {
+  color: #E40047 !important;
+}
+
+.bl {
+  background: url("../../assets/Black-pattern.jpg");
+  background-size: 400px;
+}

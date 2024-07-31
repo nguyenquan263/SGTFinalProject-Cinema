@@ -1,0 +1,506 @@
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Employees Manager</title>
+
+</head>
+
+<body>
+  <div class=" container-scroller">
+    <!--Navbar-->
+    <nav class="navbar bg-danger col-lg-12 col-12 p-0 fixed-top navbar-inverse d-flex flex-row">
+      <div class="bg-danger text-center navbar-brand-wrapper">
+        <a class="navbar-brand brand-logo" href="#">
+          <img src="assets/images/logo.png" />
+        </a>
+        <a class="navbar-brand brand-logo-mini" href="#">
+          <img src="assets/images/logo.png" alt="">
+        </a>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-center">
+        <button class="navbar-toggler navbar-toggler hidden-md-down align-self-center mr-3" type="button" data-toggle="minimize">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <ul class="navbar-nav ml-lg-auto d-flex align-items-center flex-row">
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <div class="row p-2">
+                <div style="background-color:rgb(253, 253, 253); color: midnightblue;border-radius: 15px" class="pull-left">
+                  <h4 style="margin:4px">
+                    <i class="fa fa-user-circle-o"></i> {{empName}}</h4>
+                </div>
+                <div class="p-2">
+                  <i class="fa fa-sign-out" ng-click="signOut()"></i>
+                </div>
+              </div>
+            </a>
+          </li>
+        </ul>
+        <button class="navbar-toggler navbar-toggler-right hidden-lg-up align-self-center" type="button" data-toggle="offcanvas">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+    </nav>
+    <!--End navbar-->
+    <div class="container-fluid">
+      <div class="row row-offcanvas row-offcanvas-right">
+        <nav class="bg-white sidebar sidebar-fixed sidebar-offcanvas bg-danger" id="sidebar">
+          <ul class="nav">
+            <li class="nav-item  bg-warning">
+              <a class="nav-link" href="/employee">
+                <!-- <i class="fa fa-dashboard"></i> -->
+                <img src="assets/images/employees.png" alt="">
+                <span class="menu-title text-white">Employees</span>
+              </a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="/customer">
+                <img src="assets/images/customers.png" alt="">
+                <span class="menu-title text-white">Customers</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <hr/>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/order">
+                <!-- <i class="fa fa-wpforms"></i> -->
+                <img src="assets/images/orders.png" alt="">
+                <span class="menu-title text-white">Orders</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <hr/>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/movie">
+                <!-- <i class="fa fa-calculator"></i> -->
+                <img src="assets/images/movies.png" alt="">
+                <span class="menu-title text-white">Movies</span>
+              </a>
+            </li>
+
+
+            <li class="nav-item">
+              <hr/>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/movieshow">
+                <!-- <i class="fa fa-bar-chart"></i> -->
+                <img src="assets/images/movieshows.png" alt="">
+                <span class="menu-title text-white">Movie Shows</span>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/new">
+                <!-- <i class="fa fa-font"></i> -->
+                <img src="assets/images/tickets.png" alt="">
+                <span class="menu-title text-white">News</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <hr/>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/snack">
+                <!-- <i class="fa fa-table"></i> -->
+                <img src="assets/images/snacks.png" alt="">
+                <span class="menu-title text-white">Snacks</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <!-- SIDEBAR ENDS -->
+
+        <div class="content-wrapper">
+          <div class="card">
+            <div class="card-block">
+              <h5 class="card-title mb-4 text-danger">EMPLOYEES</h5>
+              <div class="card-header container bg-white">
+                <div class=" row" role="group">
+                  <button type="button" class="btn btn-danger col" data-toggle="modal" data-target="#employeeAddingModal" (click)="openAddEmployee()">
+                    <i class="fa fa-plus"></i> ADD AN EMPLOYEE</button>
+                </div>
+              </div>
+              <table class="table">
+                <thead>
+                  <tr class="">
+                    <th>No.</th>
+                    <th>Code</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Role</th>
+                    <th>User Name</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- <tr>
+                    <td>1</td>
+                    <td>001</td>
+                    <td>Phong</td>
+                    <td>Dang Quoc thanh</td>
+                    <td>Manager</td>
+                    <td>phongdqt</td>
+
+
+                    <td class="text-center">
+                      <a href="#">
+                        <i class="fa fa-2x text-danger fa-info p-2"></i>
+                      </a>
+                      <a href="#">
+                        <i class="fa fa-2x text-danger fa-edit p-2"></i>
+                      </a>
+                      <a href="#">
+                        <i class="fa text-danger fa-2x fa-remove p-2"></i>
+                      </a>
+                    </td>
+                  </tr> -->
+
+                  <tr *ngFor="let employee of employees; let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{employee.code}}</td>
+                    <td>{{employee.firstName}}</td>
+                    <td>{{employee.lastName}}</td>
+                    <td>{{employee.role}}</td>
+                    <td>{{employee.userName}}</td>
+
+
+                    <td class="text-center">
+                        <a href="#" data-toggle="modal" data-target="#employeeDetailModal" (click)="openEditemployee(employee.id)">
+                            <i class="fa fa-2x text-primary fa-eye p-2"></i>
+                          </a>
+    
+                          <a href="#" data-toggle="modal" data-target="#employeeUpdateModal" (click)="openEditemployee(employee.id)">
+                            <i class="fa fa-2x text-success fa-info-circle p-2"></i>
+                          </a>
+                          <a href="#" data-toggle="modal" data-target="#employeeDeleteModal" (click)="openEditemployee(employee.id)">
+                            <i class="fa fa-2x text-danger fa-trash p-2"></i>
+                          </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <footer class="footer">
+          <div class="container-fluid clearfix text">
+            <span class="float-right">
+              <a href="#">Quan-Phong Group</a> &copy; 2017 </span>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <!-- Adding Modal -->
+  <div class="modal fade bd-example-modal-lg" id="employeeAddingModal" tabindex="-1" role="dialog" 
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">ADD AN EMPLOYEE</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group row">
+            <label for="aEmpcodeTF" class="col-2 col-form-label">EMPLOYEE Code (*):</label>
+            <div class="col-10">
+              <input class="form-control" type="text" value="" id="aEmpcodeTF" [(ngModel)]="code">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="aEmpfnameTF" class="col-2 col-form-label">First Name (*): </label>
+            <div class="col-10">
+              <input class="form-control" type="text" value="" id="aEmpfnameTF" [(ngModel)]="firstName">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="aEmplnameTF" class="col-2 col-form-label">Last Name (*): </label>
+            <div class="col-10">
+              <input class="form-control" type="text" value="" id="aEmplnameTF" [(ngModel)]="lastName">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="aEmpdobTF" class="col-2 col-form-label">Date Of Birth (*):</label>
+            <div class="col-10">
+              <input class="form-control" type="text" value="" id="aEmpdobTF">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="aEmpaddressTF" class="col-2 col-form-label">Address : </label>
+            <div class="col-10">
+              <input class="form-control" type="text" value="" id="aEmpaddressTF" [(ngModel)]="address">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="aEmppnumberTF" class="col-2 col-form-label">Phone Number (*):</label>
+            <div class="col-10">
+              <input class="form-control" type="tel" value="" id="aEmppnumberTF" [(ngModel)]="phoneNumber">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="aEmpemailTF" class="col-2 col-form-label">Email :</label>
+            <div class="col-10">
+              <input class="form-control" type="email" value="" id="aEmpemailTF" [(ngModel)]="email">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="aEmpusernameTF" class="col-2 col-form-label">Username (*): </label>
+            <div class="col-10">
+              <input class="form-control" type="text" value="" id="aEmpusernameTF" [(ngModel)]="username">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="aEmppasswordTF" class="col-2 col-form-label">Password (*):</label>
+            <div class="col-10">
+              <input class="form-control" type="password" value="" id="aEmppasswordTF" [(ngModel)]="password">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="aEmproleDDL" class="col-2 col-form-label">Role:</label>
+            <div class="col-10">
+              <select class="form-control " id="aEmproleDDL">
+                <option value="SELLER">SELLER</option>
+                <option value="MANAGER">MANAGER</option>
+              </select>
+            </div>
+
+          </div>
+
+
+        </div>
+        <div class="modal-footer">
+
+          <button type="button" class="btn btn-primary" (click)="addEmployee();">ADD</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Edit Modal -->
+  <div class="modal fade bd-example-modal-lg" id="employeeUpdateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">EMPLOYEE DETAIL</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group row">
+            <label for="cEmpidTF" class="col-2 col-form-label">ID :</label>
+            <div class="col-10">
+              <input class="form-control" type="text" value="" id="cEmpidTF" [(ngModel)]="id">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="cEmpcodeTF" class="col-2 col-form-label">employee Code :</label>
+            <div class="col-10">
+              <input class="form-control" type="text" value="" id="cEmpcodeTF" [(ngModel)]="code">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="cEmpfnameTF" class="col-2 col-form-label">First Name : </label>
+            <div class="col-10">
+              <input class="form-control" type="text" value="" name="cdetail" id="cEmpfnameTF" [(ngModel)]="firstName">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="cEmplnameTF" class="col-2 col-form-label">Last Name : </label>
+            <div class="col-10">
+              <input class="form-control" type="text" value="" name="cdetail" id="cEmplnameTF" [(ngModel)]="lastName">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="cEmpdobTF" class="col-2 col-form-label">Date Of Birth :</label>
+            <div class="col-10">
+              <input class="form-control" type="text" value="" name="cdetail" id="cEmpdobTF">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="cEmpaddressTF" class="col-2 col-form-label">Address : </label>
+            <div class="col-10">
+              <input class="form-control" type="text" value="" name="cdetail" id="cEmpaddressTF" [(ngModel)]="address">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="cEmppnumberTF" class="col-2 col-form-label">Phone Number :</label>
+            <div class="col-10">
+              <input class="form-control" type="tel" value="" name="cdetail" id="cEmppnumberTF" [(ngModel)]="phoneNumber">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="cEmpemailTF" class="col-2 col-form-label">Email :</label>
+            <div class="col-10">
+              <input class="form-control" type="email" value="" name="cdetail" id="cEmpemailTF" [(ngModel)]="email">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="cEmpusernameTF" class="col-2 col-form-label">Username : </label>
+            <div class="col-10">
+              <input class="form-control" type="text" value="" name="cdetail" id="cEmpusernameTF" [(ngModel)]="username">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="cEmppasswordTF" class="col-2 col-form-label">Password :</label>
+            <div class="col-10">
+              <input class="form-control" type="password" value="" name="cdetail" id="cEmppasswordTF" [(ngModel)]="password">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="cEmproleDDL" class="col-2 col-form-label">Role :</label>
+            <div class="col-10">
+              <select class="form-control " id="cEmproleDDL" name="cdetail">
+                <option value="SELLER">SELLER</option>
+                <option value="MANAGER">MANAGER</option>
+              </select>
+            </div>
+
+          </div>
+
+          <div class="form-group row">
+            <label for="cEmpstatusDDL" class="col-2 col-form-label">Status :</label>
+            <div class="col-10">
+              <select class="form-control " id="cEmpstatusDDL" name="cdetail">
+                <option value="0">Active</option>
+                <option value="-1">Deactive</option>
+              </select>
+            </div>
+
+          </div>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="editEmployee();" id="editBTN">EDIT</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- Detail Modal -->
+  <div class="modal fade " id="employeeDetailModal" tabindex="0" role="dialog" aria-hidden="true">
+      <div class="modal-dialog " role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">EMPLOYEE DETAIL</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group row">
+              <label for="cCusidTF" class="col-3 col-form-label">ID :</label>
+              <div class="col-9">{{id}}
+   
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="aCuscodeTF" class="col-3 col-form-label">Employee Code :</label>
+              <div class="col-9">{{code}}
+   
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="aCusfnameTF" class="col-3 col-form-label">First Name : </label>
+              <div class="col-9"> {{firstName}}
+   
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="aCuslnameTF" class="col-3 col-form-label">Last Name : </label>
+              <div class="col-9">{{lastName}}
+   
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="aCusdobTF" class="col-3 col-form-label">Date Of Birth :</label>
+              <div class="col-9">{{dob}}
+   
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="aCusaddressTF" class="col-3 col-form-label">Address : </label>
+              <div class="col-9">{{address}}
+   
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="cCuspnumberTF" class="col-3 col-form-label">Phone Number :</label>
+              <div class="col-9">{{phoneNumber}}
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="cCusemailTF" class="col-3 col-form-label">Email :</label>
+              <div class="col-9">{{email}}
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="cCususernameTF" class="col-3 col-form-label">Username : </label>
+              <div class="col-9">{{username}}
+              </div>
+            </div>
+   
+            <div class="form-group row">
+              <label for="aCuspasswordTF" class="col-3 col-form-label">Password :</label>
+              <div class="col-9">{{password}}
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-3 col-form-label">Role:</label>
+              <div class="col-9">{{role}}
+   
+              </div>
+   
+            </div>
+   
+            <div class="form-group row">
+              <label class="col-3 col-form-label">Status :</label>
+              <div class="col-9">{{status}}
+   
+              </div>
+   
+            </div>
+          </div>
+          <div class="modal-footer">
+           
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Delete Modal -->
+    <div class="modal" id="employeeDeleteModal" tabindex="0" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">employee DELETE</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div>Do you want to delete employee: <strong>{{firstName +' '+ lastName}}</strong> <h4> Id:  {{id}}</h4></div>
+            
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-danger" (click)="deleteEmployee();" id="deleteBTN">DELETE</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+          </div>
+        </div>
+      </div>
+    </div>
+   </body>

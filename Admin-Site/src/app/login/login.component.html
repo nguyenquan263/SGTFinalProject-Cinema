@@ -1,0 +1,44 @@
+
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Login</title>
+
+</head>
+
+<body>
+  <div class="container-scroller">
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <div class="content-wrapper full-page-wrapper d-flex align-items-center" style="background-color: cornflowerblue">
+          <div class="card col-lg-4 offset-lg-4">
+            <div class="card-block">
+              <h2 class="card-title text-danger text-left mb-5 mt-4">Login </h2>
+                <div class="form-group">
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                    <input type="text" class="form-control p_input" placeholder="Username" [(ngModel)] = "username">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                    <input type="password" class="form-control p_input" placeholder="Password" [(ngModel)] = "password">
+                  </div>
+                </div>
+                <div style="color: crimson">{{wrong}}</div>
+                <div class="text-center">
+                  <button type="submit" class="btn btn-info" (click)="check()" >Login</button>
+                </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+

@@ -1,0 +1,68 @@
+<div class="container-fluid bg-warning">
+  <div class="row">
+    <div class="container-fluid">
+      <div class="row"><h1>MOVIE SHOWS: </h1></div>
+      <div class="row">
+          
+            <button type="button" class="btn btn-success col-3 m-2" *ngFor="let ms of movieshows" (click)="getInfo(ms)">
+              {{ms.rooms.name}} * {{ms.dateShow}} * {{ms.beginTime}}
+            </button>
+         
+      </div>
+    </div>
+  </div>
+
+  
+</div>
+<div class="py-5" style="background-image: url('../../assets/MoviePattern.jpg');background-size:cover;min-width:500px;width:1350px;display: inline-block ">
+  <div class="demo">
+    <div id="seat-map" style="margin-left: 100px">
+      <div class="front">SCREEN</div>
+    </div>
+    <div class="booking-details container">
+
+      <ul class="book-left list-unstyled">
+        <li>Movie </li>
+        <li>Room </li>
+        <li>Time </li>
+        <li>Duration (minutes) </li>
+        <li>Ticket Cost (VND) </li>
+        <li>Showing Type </li>
+        <li>Tickets </li>
+        <li>Total </li>
+        <li>Seats </li>
+
+      </ul>
+
+
+      <ul class="book-right list-unstyled">
+        <li>: {{currentMovie.name}}</li>
+        <li>: {{chosenMovRoom}}</li>
+        <li>: {{chosenMovShowTime}}</li>
+        <li>: {{chosenMovDuration}}</li>
+        <li>: {{chosenMovShowCost}}</li>
+        <li>: {{chosenMovShowType}}</li>
+        <li>:
+          <!-- <span id="counter">0</span> -->{{counter}}
+        </li>
+        <li>:
+          <b>
+            
+            <!-- <span id="total">0</span> -->{{total}}
+            <i> VND</i>
+          </b>
+        </li>
+        <li>: {{seat}}</li>
+      </ul>
+      <div class="clear"></div>
+      
+      <div class="clearfix"></div>
+      <div>
+        <button class="checkout-button btn btn-lg" (click) = "getCost()">Get Cost</button>
+        <button class="checkout-button btn btn-lg" (click) = "goBook()">Done</button>
+      </div>
+      <div id="legend"></div>
+    </div>
+    <div style="clear:both"></div>
+  </div>
+</div>

@@ -1,0 +1,232 @@
+<div class="container-fluid"  style="background: url('../../assets/Blue-Pattern03.jpg'); border: 4px solid rgb(252, 252, 210); border-radius: 10px;">
+<nav class="navbar navbar-expand-md navbar-dark">
+    <a class="navbar-brand d-inline-block" href="#" target="">
+      <img src="../../assets/logo.png" class="img-fluid"> </a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-label="Toggle navigation"> <span class="fa fa-bars" style="font-size:36px;color:#009BB4"></span> </button>
+    <div class="collapse navbar-collapse p-2" id="navbarSupportedContent">
+      <ul class="navbar-nav list-unstyled mx-3" style="font-size: 30px;">
+        <div class="btn-group row">
+          <a href="/home" class="btn  btn-primary text-white"><div>Home</div></a>
+          <a href="/movie" class="btn btn-success text-white"><div>Movies</div></a>
+          <a href="/snack" class="btn  btn-danger text-white"><div>Snack</div></a>
+          <a href="/aboutus" class="btn btn-warning text-white"><div>About us</div></a>
+          <a href="/checkout" class="btn btn-secondary text-white" *ngIf="signed"><div><i class="fa fa-shopping-cart"></i></div></a>
+        </div>
+      </ul>
+    </div>
+
+    <div *ngIf="!signed">
+      <div class="btn btn-light mr-2" data-toggle="modal" data-target="#customerAddingModal"> Register <i class="fa d-inline fa-lg fa-plus list-unstyled " style="cursor:pointer"></i></div>
+    </div>
+    <div *ngIf="signed">
+      <div class="btn btn-light mr-2" data-toggle="modal" data-target="#customerEdittingModal" (click)="openUpdateinfo()" > Update information<i class="fa d-inline fa-lg fa-edit list-unstyled " style="cursor:pointer"></i></div>
+    </div>
+
+    <div *ngIf="!signed">
+      <div class="btn btn-primary" data-toggle="modal" data-target="#loginModal"> Sign In <i class="fa d-inline fa-lg fa-user-circle-o list-unstyled " style="cursor:pointer"></i></div>
+    </div>
+    <div *ngIf="signed">
+      <div class="btn btn-primary" data-toggle="modal" data-target="#logoutModal"> {{cusName}} <i class="fa d-inline fa-lg fa-sign-out list-unstyled " style="cursor:pointer"></i></div>
+    </div>
+</nav>
+</div>
+
+<!-- Modal Log In-->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">SIGN IN</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="usernameTF" class="form-control-label">User Name:</label>
+          <input type="text" class="form-control" id="usernameTF" [(ngModel)] = "userName">
+        </div>
+
+        <div class="form-group">
+          <label for="passwordTF" class="form-control-label">Password:</label>
+          <input type="password" class="form-control" id="passwordTF" [(ngModel)] = "password">
+        </div>
+        
+      </div>
+      <div class="modal-footer">
+        
+        <button type="button" class="btn btn-primary" (click) = "logIn()">Log In</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Log Out-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">SIGN OUT</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <button id="logoutBTN" type="button" class="btn btn-primary col" (click)="logOut()">Sign Out</button>
+            <button id="cancelBTN" type="button" class="btn btn-warning col" data-dismiss="modal">Cancel</button>
+          </div>
+  
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Adding Modal -->
+  <div class="modal fade bd-example-modal-lg" id="customerAddingModal" tabindex="0" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">CREATE AN ACCOUNT</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group row">
+            <label for="aCuscodeTF" class="col-2 col-form-label">Customer Code (*):</label>
+            <div class="col-10">
+              <input class="form-control" type="text" name="inputCustomer" value="" id="aCuscodeTF" [(ngModel)]="acode">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="aCusfnameTF" class="col-2 col-form-label">First Name (*): </label>
+            <div class="col-10">
+              <input class="form-control" type="text" name="inputCustomer" value="" id="aCusfnameTF" [(ngModel)]="afirstName">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="aCuslnameTF" class="col-2 col-form-label">Last Name (*): </label>
+            <div class="col-10">
+              <input class="form-control" type="text" name="inputCustomer" value="" id="aCuslnameTF" [(ngModel)]="alastName">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="aCusdobTF" class="col-2 col-form-label">Date Of Birth (*):</label>
+            <div class="col-10">
+              <input class="form-control" type="text" name="inputCustomer" value="" id="aCusdobTF" [(ngModel)]="adob">
+            </div>
+          </div>
+          
+          <div class="form-group row">
+            <label for="aCuspnumberTF" class="col-2 col-form-label">Phone Number (*):</label>
+            <div class="col-10">
+              <input class="form-control" type="tel" value="" name="inputCustomer" id="aCuspnumberTF" [(ngModel)]="aphoneNumber">
+            </div>
+          </div>
+          
+          <div class="form-group row">
+            <label for="aCususernameTF" class="col-2 col-form-label">Username (*): </label>
+            <div class="col-10">
+              <input class="form-control" type="text" value="" name="inputCustomer" id="aCususernameTF" [(ngModel)]="ausername">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="aCuspasswordTF" class="col-2 col-form-label">Password (*):</label>
+            <div class="col-10">
+              <input class="form-control" type="password" value="" name="inputCustomer" id="aCuspasswordTF" [(ngModel)]="apassword">
+            </div>
+          </div>
+          
+
+
+        </div>
+        <div class="modal-footer">
+
+          <button type="button" class="btn btn-primary" (click)="addCustomer();">ADD</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  
+  <!-- EditModal -->
+  <div class="modal fade bd-example-modal-lg" id="customerEdittingModal" tabindex="-1" role="dialog" 
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">UPDATE CUSTOMER</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group row">
+          <label for="aCusfnameTF" class="col-2 col-form-label">First Name(*) : </label>
+          <div class="col-10">
+            <input class="form-control" type="text" value=""  id="uCusfnameTF" >
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="aCuslnameTF" class="col-2 col-form-label">Last Name(*) : </label>
+          <div class="col-10">
+            <input class="form-control" type="text" value=""  id="uCuslnameTF" >
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="aCusdobTF" class="col-2 col-form-label">Date Of Birth(*) :</label>
+          <div class="col-10">
+            <input class="form-control" type="text" value=""  id="uCusdobTF" >
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="aCusaddressTF" class="col-2 col-form-label">Address : </label>
+          <div class="col-10">
+            <input class="form-control" type="text" value="" id="uCusaddressTF" >
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="cCuspnumberTF" class="col-2 col-form-label">Phone Number(*) :</label>
+          <div class="col-10">
+            <input class="form-control" type="tel" value="" id="uCuspnumberTF" >
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="cCusemailTF" class="col-2 col-form-label">Email :</label>
+          <div class="col-10">
+            <input class="form-control" type="email" value="" id="uCusemailTF" >
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="cCususernameTF" class="col-2 col-form-label">Username(*) : </label>
+          <div class="col-10">
+            <input class="form-control" type="text" value="" id="uCususernameTF" >
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="cCuspasswordTF" class="col-2 col-form-label">Password(*) :</label>
+          <div class="col-10">
+            <input class="form-control" type="password" value="" id="uCuspasswordTF" >
+          </div>
+        </div>
+        
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="finishUpdateinfo()" id="editBTN">UPDATE</button>
+
+        <button type="button" class="btn btn-light" data-dismiss="modal">CANCEL</button>
+      </div>
+    </div>
+  </div>
+</div>

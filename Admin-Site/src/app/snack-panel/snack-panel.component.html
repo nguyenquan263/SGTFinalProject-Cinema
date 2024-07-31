@@ -1,0 +1,343 @@
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Employees Manager</title>
+
+</head>
+
+<body>
+  <div class=" container-scroller">
+    <!--Navbar-->
+    <nav class="navbar bg-danger col-lg-12 col-12 p-0 fixed-top navbar-inverse d-flex flex-row">
+      <div class="bg-danger text-center navbar-brand-wrapper">
+        <a class="navbar-brand brand-logo" href="#">
+          <img src="assets/images/logo.png" />
+        </a>
+        <a class="navbar-brand brand-logo-mini" href="#">
+          <img src="assets/images/logo.png" alt="">
+        </a>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-center">
+        <button class="navbar-toggler navbar-toggler hidden-md-down align-self-center mr-3" type="button" data-toggle="minimize">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <ul class="navbar-nav ml-lg-auto d-flex align-items-center flex-row">
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <div class="row p-2">
+                <div style="background-color:rgb(253, 253, 253); color: midnightblue;border-radius: 15px" class="pull-left">
+                  <h4 style="margin:4px">
+                    <i class="fa fa-user-circle-o"></i> {{empName}}</h4>
+                </div>
+                <div class="p-2">
+                  <i class="fa fa-sign-out" ng-click="signOut()"></i>
+                </div>
+              </div>
+            </a>
+          </li>
+        </ul>
+        <button class="navbar-toggler navbar-toggler-right hidden-lg-up align-self-center" type="button" data-toggle="offcanvas">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+    </nav>
+    <!--End navbar-->
+    <div class="container-fluid">
+      <div class="row row-offcanvas row-offcanvas-right">
+        <nav class="bg-white sidebar sidebar-fixed sidebar-offcanvas bg-danger" id="sidebar">
+          <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/employee">
+                <!-- <i class="fa fa-dashboard"></i> -->
+                <img src="assets/images/employees.png" alt="">
+                <span class="menu-title text-white">Employees</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/customer">
+                <img src="assets/images/customers.png" alt="">
+                <span class="menu-title text-white">Customers</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <hr/>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/order">
+                <!-- <i class="fa fa-wpforms"></i> -->
+                <img src="assets/images/orders.png" alt="">
+                <span class="menu-title text-white">Orders</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <hr/>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/movie">
+                <!-- <i class="fa fa-calculator"></i> -->
+                <img src="assets/images/movies.png" alt="">
+                <span class="menu-title text-white">Movies</span>
+              </a>
+            </li>
+
+
+            <li class="nav-item">
+              <hr/>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/movieshow">
+                <!-- <i class="fa fa-bar-chart"></i> -->
+                <img src="assets/images/movieshows.png" alt="">
+                <span class="menu-title text-white">Movie Shows</span>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/new">
+                <!-- <i class="fa fa-font"></i> -->
+                <img src="assets/images/tickets.png" alt="">
+                <span class="menu-title text-white">News</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <hr/>
+            </li>
+            <li class="nav-item  bg-warning">
+              <a class="nav-link" href="/snack">
+                <!-- <i class="fa fa-table"></i> -->
+                <img src="assets/images/snacks.png" alt="">
+                <span class="menu-title text-white">Snacks</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <!-- SIDEBAR ENDS -->
+
+        <div class="content-wrapper">
+          <div class="card">
+            <div class="card-block">
+              <h5 class="card-title mb-4 text-danger">SNACKS</h5>
+              <div class="card-header container bg-white">
+                <div class=" row" role="group">
+                  <button type="button" class="btn btn-danger col" data-toggle="modal" data-target="#snackAddingModal" (click)="openaddSnack()">
+                    <i class="fa fa-plus"></i> ADD A SNACK</button>
+                </div>
+              </div>
+              <table class="table">
+                <thead>
+                  <tr class="">
+                    <th>No.</th>
+                    <th>Snack Name</th>
+                    <th>Image</th>
+                    <th>Cost</th>
+
+
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let snack of snacks; let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{snack.name}}</td>
+                    <td><img [src]="snack.imageLink" width="50px" height="50px"/></td>
+                    <td>{{snack.cost}}</td>
+
+
+
+                    <td class="text-center">
+                      <a href="#" data-toggle="modal" data-target="#snackDetailModal" (click)="openEditsnack(snack.id)">
+                        <i class="fa fa-2x text-primary fa-eye p-2"></i>
+                      </a>
+
+                      <a href="#" data-toggle="modal" data-target="#snackUpdateModal" (click)="openEditsnack(snack.id)">
+                        <i class="fa fa-2x text-success fa-info-circle p-2"></i>
+                      </a>
+                      <a href="#" data-toggle="modal" data-target="#snackDeleteModal" (click)="openEditsnack(snack.id)">
+                        <i class="fa fa-2x text-danger fa-trash p-2"></i>
+                      </a>
+
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <footer class="footer">
+          <div class="container-fluid clearfix text">
+            <span class="float-right">
+              <a href="#">Quan-Phong Group</a> &copy; 2017 </span>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade bd-example-modal-lg" id="snackAddingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">ADD A SNACK</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group row">
+            <label for="aSnanameTF" class="col-2 col-form-label">Name (*):</label>
+            <div class="col-10">
+              <input class="form-control" type="text" value="" id="aSnanameTF" [(ngModel)]="name">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="aSnaimageTF" class="col-2 col-form-label">Image link :</label>
+            <div class="col-10">
+              <input class="form-control" type="text" value="" id="aSnaimageTF" [(ngModel)]="imageLink">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="aSnacostTF" class="col-2 col-form-label">Cost :</label>
+            <div class="col-10">
+              <input class="form-control" type="text" value="" id="aSnacostTF" [(ngModel)]="cost">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="addSnack();">ADD</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Edit Modal -->
+  <div class="modal fade bd-example-modal-lg" id="snackUpdateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">UPDATE SNACK</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <div class="form-group row">
+            <label for="cSnaidTF" class="col-2 col-form-label">ID :</label>
+            <div class="col-10">
+              <input class="form-control" type="text" value="" id="cSnaidTF" [(ngModel)]="id">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="cSnanameTF" class="col-2 col-form-label">Name (*):</label>
+            <div class="col-10">
+              <input class="form-control" type="text" value="" name="cdetail" id="cSnanameTF" [(ngModel)]="name">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="cSnaimageTF" class="col-2 col-form-label">Image link :</label>
+            <div class="col-10">
+              <input class="form-control" type="text" value="" name="cdetail" id="cSnaimageTF" [(ngModel)]="imageLink">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="cSnacostTF" class="col-2 col-form-label">Cost :</label>
+            <div class="col-10">
+              <input class="form-control" type="text" value="" name="cdetail" id="cSnacostTF" [(ngModel)]="cost">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="cSnastatusDDL" class="col-2 col-form-label">Status:</label>
+            <div class="col-10">
+              <select class="form-control " id="cSnacstatusDDL">
+                <option value="-1">Deactive</option>
+                <option value="0">Active</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="editSnack();" id="editBTN">EDIT</button>
+          <button type="button" class="btn btn-danger" (click)="deleteSnack();" id="deleteBTN">DELETE</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Detail Modal -->
+
+
+  <div class="modal fade " id="snackDetailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog " role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">SNACK DETAIL</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <div class="form-group row">
+            <label for="cSnaidTF" class="col-2 col-form-label">ID :</label>
+            <div class="col-10">{{id}}
+
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="cSnanameTF" class="col-2 col-form-label">Name (*):</label>
+            <div class="col-10">{{name}}
+
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="cSnacostTF" class="col-2 col-form-label">Cost :</label>
+            <div class="col-10">{{cost}}
+
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="cSnastatusDDL" class="col-2 col-form-label">Status:</label>
+            <div class="col-10">{{status}}
+
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Delete Modal -->
+  <div class="modal" id="snackDeleteModal" tabindex="0" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">SNACK DELETE</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div>Do you want to delete snack: <strong>{{name}}</strong><h5> Cost: {{cost}} VND </h5><h4> Id:  {{id}}</h4></div>
+         
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="deleteNew();" id="deleteBTN">DELETE</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

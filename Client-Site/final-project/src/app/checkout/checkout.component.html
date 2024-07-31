@@ -1,0 +1,158 @@
+<div class="container-fluid" style="background: url('../../assets/HomePattern.jpg');border-radius: 10px">
+  <div class="row p-2">
+    <div class="col-md-8">
+      <div class="card card-info">
+        <div class="card-heading">
+          <div class="card-title">
+            <div class="row justify-content-center">
+              <h3>YOUR BILL</h3>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <h4 class="product-name">
+                <strong>Product name</strong>
+              </h4>
+            </div>
+            <div class="col">
+              <h4 class="product-name">
+                <strong>Quantity</strong>
+              </h4>
+            </div>
+            <div class="col">
+              <h4 class="product-name">
+                <strong>Cost (VND)</strong>
+              </h4>
+            </div>
+            <div class="col">
+                <h4 class="product-name">
+                  <strong>Sub Total (VND)</strong>
+                </h4>
+              </div>
+            <div class="col">
+              <h4 class="product-name">
+                <strong> </strong>
+              </h4>
+            </div>
+          </div>
+
+          <div>
+            <hr>
+          </div>
+
+          <div class="row">
+            <div class="container">
+              <div class="row" *ngFor="let current of seatArr; let i = index">
+                <div class="col">
+                  <p>
+                    {{current}}
+                  </p>
+                
+                </div>
+                
+                <div class="col">
+                  <p>
+                    
+                  </p>
+                </div>
+                
+                <div class="col">
+                  <p>
+                    {{priceArr[i]}}
+                  </p>
+                </div>
+
+                <div class="col">
+                    <p>
+                      {{priceArr[i]}}
+                    </p>
+                </div>
+
+                <div class="col" (click)="deleteTicket(i)">
+                  <div class="fa fa-remove text-danger" ></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div>
+            <hr>
+          </div>
+
+          <div class="row">
+              <div class="container">
+                  <div class="row" *ngFor="let curr of snackNamearr; let i = index">
+                    <div class="col">
+                      <p>
+                        {{curr}}
+                      </p>
+                    
+                    </div>
+                    
+                    <div class="col">
+                      <p>
+                        {{snackQuantityarr[i]}}
+                      </p>
+                    </div>
+                    
+                    <div class="col">
+                      <p>
+                        {{snackPricearr[i]}}
+                      </p>
+                    </div>
+
+                    <div class="col">
+                        <p>
+                          {{snackPricearr[i] * snackQuantityarr[i]}}
+                        </p>
+                      </div>
+
+                    <div class="col" (click)="deleteSnack(i)">
+                      <div class="fa fa-remove text-danger" ></div>
+                    </div>
+                  </div>
+                </div>
+
+          </div>
+          <div>
+            <hr>
+          </div>
+        </div>
+
+        <div class="card-footer">
+          <div class="row">
+            <div class="col">
+              <h4 class="text-right">Total
+                <strong>{{sumCost}} VND</strong>
+              </h4>
+            </div>
+            <div class="col-1"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-md-4">
+      <div class="card card-block">
+        
+        <div class="card-body">
+          <button type="button" class="btn btn-success btn-lg" (click)="checkOut()">
+            Checkout
+          </button>
+
+          <button type="button" class="btn btn-warning btn-lg" (click)="destroy()">
+            Clear The Bill
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+

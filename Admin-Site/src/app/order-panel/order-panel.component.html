@@ -1,0 +1,442 @@
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Employees Manager</title>
+
+</head>
+
+<body>
+  <div class=" container-scroller">
+    <!--Navbar-->
+    <nav class="navbar bg-danger col-lg-12 col-12 p-0 fixed-top navbar-inverse d-flex flex-row">
+      <div class="bg-danger text-center navbar-brand-wrapper">
+        <a class="navbar-brand brand-logo" href="#">
+          <img src="assets/images/logo.png" />
+        </a>
+        <a class="navbar-brand brand-logo-mini" href="#">
+          <img src="assets/images/logo.png" alt="">
+        </a>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-center">
+        <button class="navbar-toggler navbar-toggler hidden-md-down align-self-center mr-3" type="button" data-toggle="minimize">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <ul class="navbar-nav ml-lg-auto d-flex align-items-center flex-row">
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <div class="row p-2">
+                <div style="background-color:rgb(253, 253, 253); color: midnightblue;border-radius: 15px" class="pull-left">
+                  <h4 style="margin:4px">
+                    <i class="fa fa-user-circle-o"></i> {{empName}}</h4>
+                </div>
+                <div class="p-2">
+                  <i class="fa fa-sign-out" ng-click="signOut()"></i>
+                </div>
+              </div>
+            </a>
+          </li>
+        </ul>
+        <button class="navbar-toggler navbar-toggler-right hidden-lg-up align-self-center" type="button" data-toggle="offcanvas">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+    </nav>
+    <!--End navbar-->
+    <div class="container-fluid">
+      <div class="row row-offcanvas row-offcanvas-right">
+        <nav class="bg-white sidebar sidebar-fixed sidebar-offcanvas bg-danger" id="sidebar">
+
+          <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/employee">
+                <!-- <i class="fa fa-dashboard"></i> -->
+                <img src="assets/images/employees.png" alt="">
+                <span class="menu-title text-white">Employees</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/customer">
+                <img src="assets/images/customers.png" alt="">
+                <span class="menu-title text-white">Customers</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <hr/>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link  bg-warning" href="/order">
+                <!-- <i class="fa fa-wpforms"></i> -->
+                <img src="assets/images/orders.png" alt="">
+                <span class="menu-title text-white">Orders</span>
+              </a>
+            </li>
+
+            <li class="nav-item bg-white">
+              <a class="nav-link" data-toggle="modal" data-target="#orderExpireModal">
+                <span class="menu-title text-danger" style="cursor: pointer"><i class="fa fa-ban text-warning"></i>Expire some orders</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <hr/>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/movie">
+                <!-- <i class="fa fa-calculator"></i> -->
+                <img src="assets/images/movies.png" alt="">
+                <span class="menu-title text-white">Movies</span>
+              </a>
+            </li>
+
+
+            <li class="nav-item">
+              <hr/>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/movieshow">
+                <!-- <i class="fa fa-bar-chart"></i> -->
+                <img src="assets/images/movieshows.png" alt="">
+                <span class="menu-title text-white">Movie Shows</span>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/ticket">
+                <!-- <i class="fa fa-font"></i> -->
+                <img src="assets/images/tickets.png" alt="">
+                <span class="menu-title text-white">News</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <hr/>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/snack">
+                <!-- <i class="fa fa-table"></i> -->
+                <img src="assets/images/snacks.png" alt="">
+                <span class="menu-title text-white">Snacks</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <!-- SIDEBAR ENDS -->
+
+        <div class="content-wrapper">
+          <div class="card">
+            <div class="card-block">
+              <h5 class="card-title mb-4 text-danger">ORDERS</h5>
+              <div class="card-header container bg-white">
+                <div class=" row" role="group">
+                  <button type="button" class="btn btn-danger col" data-toggle="modal" data-target="#q1Modal">
+                    SHOW MOVIE SHOWS REVENUE
+                  </button>
+
+                  <button type="button" class="btn btn-danger col" data-toggle="modal" data-target="#q2Modal">
+                    SHOW REVENUE BY DATE
+                  </button>
+                </div>
+              </div>
+
+              <table class="table">
+                <thead>
+                  <tr class="">
+                    <th>No.</th>
+                    <!-- <th>Code</th> -->
+                    <th>Order Date</th>
+                    <th>Order Time</th>
+                    <th>Customer Name</th>
+                    <th>Customer Phone</th>
+                    <th>Status</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+
+
+                  <tr *ngFor="let order of orders; let i=index">
+                    <td>{{i+1}}</td>
+                    <!-- <td>{{order.code}}</td> -->
+                    <td>{{order.ordDate}}</td>
+                    <td>{{order.ordTime}}</td>
+                    <td>{{order.customers.lastName +' '+order.customers.firstName}}</td>
+                    <!-- <td>
+                      <div *ngIf="order.employees !== null">{{order.employees.lastName +' '+order.employees.firstName}}</div>
+                    </td> -->
+                    <td>{{order.customers.phoneNumber}}</td>
+                    <td>{{getStringstatus(order.status)}}</td>
+                    <td class="text-center">
+                      <a href="#" data-toggle="modal" data-target="#orderDetailModal" (click)="openEditorder(order.id)">
+                        <i class="fa fa-2x text-danger fa-info-circle p-2"></i>
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <footer class="footer">
+          <div class="container-fluid clearfix text">
+            <span class="float-right">
+              <a href="#">Quan-Phong Group</a> &copy; 2017 </span>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Detail/Edit/Delete Modal -->
+  <div class="modal fade bd-example-modal-lg" id="orderDetailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Order DETAIL</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-5">
+          <!-- <div class="form-group row">
+            <label class="col-3 col-form-label">ID :</label>
+            <div class="col-9">{{id}}
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-3 col-form-label">Order Code (*):</label>
+            <div class="col-9">{{code}}
+            </div>
+          </div> -->
+
+
+          <div class="form-group row">
+            <label class="col-3 col-form-label">Order date(*):</label>
+            <div class="col-9">{{date}}
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-3 col-form-label">Order time : </label>
+            <div class="col-9">{{time}}
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-3 col-form-label">Employee Name(*):</label>
+            <div class="col-9">{{employeeName}}
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-3 col-form-label">Customer Name(*):</label>
+            <div class="col-9">{{customerName}}
+            </div>
+          </div>
+
+
+          <div class="form-group row">
+            <label for="cNewstatusDDL" class="col-3 col-form-label">Status :</label>
+            <div class="col-9">
+              <select class="form-control " id="cOrderstatusDDL">
+                <option value="0">NEW</option>
+                <option value="1">PAID</option>
+                <option value="-1">EXPIRED</option>
+              </select>
+            </div>
+
+          </div>
+        </div>
+        <div class="col-7" style="background-color:ghostwhite; display: inline-block;border-radius: 0.5rem">
+            <h3>Customer order list</h3>
+            <div class="row p-2" *ngFor="let tic of ticket; let i = index">
+              <div>No: {{i+1}} Ticket: {{tic.seats.roww}}_{{tic.seats.columnn}} Room: {{tic.seats.columnn}} - Movie: {{tic.movieShows.movies.name}} - Date Show: {{tic.movieShows.dateShow}}
+                - Begin Time: {{tic.movieShows.beginTime}} - Cost {{tic.cost}} VND</div>
+            </div>
+            <hr>
+            <div class="row p-2" *ngFor="let snack of snackorder; let i = index">
+              <div>No: {{i+1}} {{snack.snacks.name}} - Price {{snack.cost}} - Quantity {{snack.quantity}} - Total {{snack.quantity*snack.cost}}
+                VND
+              </div>
+            </div>
+            <hr>
+            <div class="pull-right">
+              <h1>Total: </h1>
+              <h3>{{Totalsnackcost + Totalticketcost}} VND</h3>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div class="modal-footer">
+          <!-- <button type="button" class="btn btn-success" (click)="acceptOrder();" id="ordAccBTN" *ngIf="!accBTN">ACCEPT</button>
+          <button type="button" class="btn btn-danger" (click)="editOrder();" id="ordDisBTN">{{disBTNstatus}}</button> -->
+          <button type="button" class="btn btn-success" (click)="doneAction()" id="ordDisBTN">DONE</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXPIRE ORDER  -->
+
+  <!-- Detail/Edit/Delete Modal -->
+  <div class="modal fade bd-example-modal-lg" id="orderExpireModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">EXPIRE ORDER WINDOW</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group row">
+            <label for="msAftertoday" class="col-3 col-form-label">Movie Shows :</label>
+            <div class="col-9">
+              <select class="form-control " id="msAftertoday">
+                  <option value="-1"> CHOOSE A MOVIE SHOW </option>
+                <option *ngFor="let ms of msAftertoday" [value]="ms.id">{{ms.movies.name}} -- {{ms.rooms.name}} -- {{ms.dateShow}} -- {{ms.beginTime}}</option>
+              </select>
+            </div>
+
+          </div>
+          <table class="table">
+            <thead>
+              <tr class="">
+                <th>No.</th>
+                <th>Code</th>
+                <th>By Customer</th>
+                <th>Order Date</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+
+
+              <tr *ngFor="let order of ordersNew; let i=index">
+                <td>{{i+1}}</td>
+                <td>{{order.code}}</td>
+                <td>{{order.customers.lastName +' '+order.customers.firstName}}</td>
+                <td>{{order.ordDate}}</td>
+                <td>{{getStringstatus(order.status)}}</td>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-success" (click)="expireOrder()" id="ordDisBTN">EXPIRE THOSE ORDER</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Query 1 Modal -->
+  <div class="modal fade bd-example-modal-lg" id="q1Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">REVENUE OF MOVIE SHOWS</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <table class="table">
+            <thead>
+              <tr class="">
+                <th>No.</th>
+                <th>Movie Name</th>
+                <th>Show Room</th>
+                <th>Date Show (YYYY-MM-DD)</th>
+                <th>Begin Time(HH:MM:SS)</th>
+                <th>Total Cost(VND)</th>
+              </tr>
+            </thead>
+            <tbody>
+
+
+              <tr *ngFor="let order of revenueMS; let i=index">
+                <td>{{i+1}}</td>
+                <td>{{order.movieName}}</td>
+                <td>{{order.roomName}}</td>
+                <td>{{order.dateShow}}</td>
+                <td>{{order.beginTime}}</td>
+                <td>{{order.sumCost}}</td>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Query 2 Modal -->
+  <div class="modal fade bd-example-modal-lg" id="q2Modal" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="container">
+            <div class="row">
+              <h5 class="modal-title" id="exampleModalLabel">REVENUE BY DATE</h5>
+            </div>
+            <div class="row">
+              <input class="form-control col mr-2" type="text" placeholder="From Date" value="" id="beginDate">
+              <input class="form-control col ml-2" type="text" placeholder="To Date" value="" id="endDate">
+            </div>
+            <div class="row mt-3">
+              <button type="button" class="btn btn-primary" id="getorderBTN" (click)="getResorder();">GET ORDERS</button>
+            </div>
+          </div>
+        </div>
+        <div class="modal-body">
+
+          <table class="table" id="revenueTime">
+            <thead>
+              <tr class="">
+                <th>No.</th>
+                <th>Customer Full Name</th>
+                <th>Order Date (YYYY-MM-DD)</th>
+                <th>Total Cost (VND)</th>
+              </tr>
+            </thead>
+            <tbody>
+
+
+              <tr *ngFor="let order of resOrd; let i=index">
+                <td>{{i+1}}</td>
+                <td>{{order.cusFirstname}} {{order.cusLastname}}</td>
+                <td>{{order.ordDate}}</td>
+                <td>{{order.sumCost}}</td>
+
+
+              </tr>
+            </tbody>
+          </table>
+          <h1>Total Money : {{total2}} VND</h1>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+      </div>
+    </div>
+  </div>
+
+</body>
